@@ -6,37 +6,14 @@ using namespace std;
 
 namespace zich{
     Matrix::Matrix(vector<double> mat, int row, int col){
-        //good_input(col,row);
         if(col <= 0 || row <= 0 || mat.size() != col*row){
             throw runtime_error("row and col must be positive");
         }
         this->column = col;
         this->row = row; 
-            // this->data = mat;
         this->data = move(mat);
     }    
-    // bool Matrix::good_input(int col, int row) const{
-    //     if(col <= 0 || row <= 0){
-    //         throw runtime_error("row and col must be positive");
-    //     }
-    //     return true;
-    // }
-    // bool Matrix::equal_size(const Matrix& one, const Matrix& two) {
-    //     //Matrix::good_input(one.getCol(),one.getRow());
-    //     //good_input(two.getCol(), two.getRow());
-    //     if (!(one->getCol() == two.getCol() && one.getRow() == two.getRow())){
-    //         throw runtime_error("row and col must be equals");
-    //     }
-    //     return true;
-    // }   
-    // int Matrix:: sumMatrix(Matrix& other){
-    //     int sum = 0;
-    //     int len = other.getCol()*other.getRow();
-    //     for(size_t i=0; i<len; i++){
-    //         sum += other.data.at(i);
-    //     }
-    //     return sum;
-    // }
+
     double Matrix:: sumMatrix1() const{
         double sum = 0;
         int len = this->column*this->row;
@@ -46,7 +23,6 @@ namespace zich{
         return sum;
     }
     Matrix Matrix:: operator+(Matrix& other){
-        //Matrix::equal_size(*this, other);
         if (this->column != other.column || this->row != other.row){
             throw runtime_error("Matrix must be same size");
         }
@@ -58,7 +34,6 @@ namespace zich{
         return ans;
     }
     Matrix Matrix:: operator-(Matrix& other){
-        //equal_size(*this, other);
         if (this->column != other.column || this->row != other.row){
             throw runtime_error("Matrix must be same size");
         }
@@ -70,7 +45,6 @@ namespace zich{
         return ans;
     }
     Matrix& Matrix:: operator+=(Matrix& other){
-        //equal_size(*this, other);
         if (this->column != other.column || this->row != other.row){
             throw runtime_error("Matrix must be same size");
         }
@@ -81,7 +55,6 @@ namespace zich{
         return *this;
     }
     Matrix& Matrix:: operator-=(Matrix& other){
-        //equal_size(*this, other);
         if (this->column != other.column || this->row != other.row){
             throw runtime_error("Matrix must be same size");
         }
@@ -109,7 +82,6 @@ namespace zich{
         if (this->column != other.column || this->row != other.row){
             throw runtime_error("Matrix must be same size");
         }
-        //equal_size(*this, other);
         double sum_this = this->sumMatrix1();
         double sum_other = other.sumMatrix1();
         return sum_this < sum_other;
@@ -126,7 +98,6 @@ namespace zich{
         if (this->column != other.column || this->row != other.row){
             throw runtime_error("Matrix must be same size");
         }
-        //equal_size(*this, other);
         double sum_this = this->sumMatrix1();
         double sum_other = other.sumMatrix1();
         return sum_this > sum_other;
@@ -135,7 +106,6 @@ namespace zich{
         if (this->column != other.column || this->row != other.row){
             throw runtime_error("Matrix must be same size");
         }
-        //equal_size(*this, other);
         double sum_this = this->sumMatrix1();
         double sum_other = other.sumMatrix1();
         return sum_this >= sum_other;
@@ -156,12 +126,10 @@ namespace zich{
         if (this->column != other.column || this->row != other.row){
             throw runtime_error("Matrix must be same size");
         }
-        //equal_size(*this, other);
         double sum_this = this->sumMatrix1();
         double sum_other = other.sumMatrix1();
         return sum_this != sum_other;
     } 
-    ///////////////////////////////not sure///////////////////////////////////////
     Matrix& Matrix:: operator++(){
         Matrix ans = Matrix(this->data,this->row,this->column);
         int len = this->column * this->row;
@@ -255,12 +223,10 @@ namespace zich{
             }
             
         }
-        //cout << tmp << endl;
         this->data = tmp;
         this->column = other.column;
         return *this;
     }
-    // todo:
     ostream& operator<<(ostream& os, const Matrix& other){
         for (int i = 0; i <other.row; i++){
             for (int j = 0; j < other.column; j++){
